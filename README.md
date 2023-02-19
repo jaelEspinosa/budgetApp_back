@@ -1,10 +1,11 @@
-# Auth backend
+# Eureka backend
 
 
 ## Descripción
 
-- Plantilla de lo que seria el back de autenticación
+- Api para la db de eureka
 - Con end-points para confirmar usuarios y recuperar contraseña
+- con end-points protegidos por token para la DB
 
 
 
