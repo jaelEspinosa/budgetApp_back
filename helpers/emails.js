@@ -23,7 +23,7 @@ export const emailRegistro = async datos =>{
         html: `<p>hola, ${nombre}.</p>
         <p>Tu cuenta ya está casi lista, confirmala a través del siguiente enlace</p>
 
-        <a href = "${process.env.FRONTEND_URL}/confirmPage/${token}">Confirmar Cuenta aqui</a>
+        <a href = "${process.env.FRONTEND_URL}/confirm/${token}">Confirmar Cuenta aqui</a>
 
         <p>Si no has creado esta cuenta puedes ignorar este email</p>
         

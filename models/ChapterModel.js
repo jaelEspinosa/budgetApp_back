@@ -4,7 +4,7 @@ const chapterSchema = mongoose.Schema({
 
     rank:{
         type: Number,
-        required: true
+        required: false
     },
     description:{
         type: String, 
