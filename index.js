@@ -31,7 +31,7 @@ const corsOptions= {
             callback(null, true)
         }else{
           
-            callback(new Error('No permitido por CORS', process.env.FRONTEND_URL ))
+            callback(new Error('No permitido por CORS'))
         }
     }
 }
