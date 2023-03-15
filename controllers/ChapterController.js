@@ -10,7 +10,7 @@ const newChapter = async ( req, res )=>{
     
    } catch (error) {
      console.log(error)
-     return res.status(500).json({msg:'There was an error'})
+     return res.status(500).json({msg:'There was an error '})
    }
 };
 

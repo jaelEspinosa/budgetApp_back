@@ -181,7 +181,7 @@ const nuevoPassword = async ( req, res ) =>{
        await user.save();
        res.status(200).json({msg:'Password successfully updated'})   
    } catch (error) {
-    const e = new Error('There was an error')
+    const e = new Error('There was an error ')
     return res.status(400).json({msg: e.message})
     
    }

@@ -61,7 +61,7 @@ const editBudget = async ( req, res ) => {
 
    try {
      const budget = await Budget.findByIdAndUpdate( id, {budgetDB, ...budgetAct}, {new:true}).populate('chapters')
-     return res.status(200).json({msg:'Data updated', budget})
+     return res.status(200).json({msg:'Data updated ', budget})
     
    } catch (error) {
      console.log(error)

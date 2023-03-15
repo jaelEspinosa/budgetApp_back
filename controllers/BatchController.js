@@ -5,7 +5,7 @@ import Batch from '../models/BatchModel.js'
 const newBatch = async (req,res) =>{
 
     try {
-      const batch = new Batch(req.body)  
+      const batch = new Batch( req.body )  
       await batch.save()
       res.status(200).json({msg:'saved Successfully ', batch})
     } catch (error) {
