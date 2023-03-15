@@ -14,7 +14,7 @@ const register = async ( req, res )=>{
    // prevenir un usuario duplicado
 
    if( user ){
-       return res.status(401).json({ msg: 'Este usuario ya existe'})
+       return res.status(401).json({ msg: 'This user already exists'}) 
    };
 
    try {
@@ -32,7 +32,7 @@ const register = async ( req, res )=>{
     //enviar correo de confirmacion con el token unico
     await emailRegistro( userGuardado)
    
-    return res.status(200).json({ msg:'usuario Guardado', userGuardado })
+    return res.status(200).json({ msg:'Saved user', userGuardado })
   
     } catch (error) {
         console.log(error)
@@ -63,7 +63,7 @@ const confirmar = async ( req, res ) =>{
     const usuarioAConfirmar = await User.findOne({ token })
     
     if (!usuarioAConfirmar) {
-        const error= new Error('usuario no encontrado')
+        const error= new Error('User not found')
         return res.status(404).json({ msg: error.message})
     }
 
@@ -71,11 +71,11 @@ const confirmar = async ( req, res ) =>{
         usuarioAConfirmar.token = null;
         usuarioAConfirmar.confirmado = true;
         await usuarioAConfirmar.save()
-        return res.status(200).json({msg: 'Usuario confirmado con éxito'})
+        return res.status(200).json({msg: 'User successfully confirmed'})
         
     } catch (error) {
         console.log(error)
-        return res.status(500).json({msg: 'Ha ocurrido un error, por favor hable con el administrador'})
+        return res.status(500).json({msg: 'There was an error'})
     }
 
     
@@ -90,14 +90,14 @@ const autenticar = async (req, res) =>{
 
         const user = await User.findOne({ email })
         if (!user) {
-            const error= new Error('Este usuario no existe')
+            const error= new Error('This user not exists')
             return res.status(404).json({ msg: error.message})
             }
 
         // comprobar si esta confirmado el usuario
 
         if (!user.confirmado) {
-            const error = new Error('Cuenta no confirmada, revise su bandeja de entrada.')
+            const error = new Error('Account not confirmed, please check your inbox')
             return res.status(401).json({msg: error.message})        
             }
 
@@ -112,7 +112,7 @@ const autenticar = async (req, res) =>{
         }
 
         if(!validPassword){
-            const error = new Error('Usuario o contraseña incorrectos.')
+            const error = new Error('Incorrect username or password')
             return res.status(401).json({msg: error.message})
         }
 
@@ -122,7 +122,7 @@ const autenticar = async (req, res) =>{
         
     } catch (error) {
         console.log(error)
-        return res.status(500).json({msg: 'hubo un error, por favor hable con el administrador'})
+        return res.status(500).json({msg: 'There was an error'})
     }
 }
 const olvidePassword = async ( req, res ) =>{
@@ -132,7 +132,7 @@ const olvidePassword = async ( req, res ) =>{
 
     
     if( !existeUser ){
-        const error = new Error('El usuario no existe')
+        const error = new Error('User not found')
         return res.status(404).json({msg:error.message})
     }
     try {
@@ -140,7 +140,7 @@ const olvidePassword = async ( req, res ) =>{
         await existeUser.save()
        
         await resetPassword( existeUser )
-        return res.status(200).json({msg: 'Revisa tu bandeja de entrada y sigue las indicaciones'})
+        return res.status(200).json({msg: 'Check your inbox and follow the instructions'})
 
 
     } catch (error) {
@@ -156,9 +156,9 @@ const comprobarToken = async ( req, res ) =>{
 
     if( tokenValido ) {
         // El token es válido y el usuario existe 
-        res.status(200).json({msg:'Token válido y el usuario existe'})
+        res.status(200).json({msg:'Token válid and the user exists'})
     } else {
-        const error = new Error('Token no válido')
+        const error = new Error('Token not valid')
         res.status(400).json({msg:error.message})
     }
     
@@ -172,16 +172,16 @@ const nuevoPassword = async ( req, res ) =>{
    const user = await User.findOne({ token })
 
    if( !user ) {
-    const error = new Error('Hubo un error')
+    const error = new Error('There was an error')
     return res.status(400).json({msg: error.message})
    }
    try {
        user.password = password
        user.token = null
        await user.save();
-       res.status(200).json({msg:'Password modificado con éxito'})   
+       res.status(200).json({msg:'Password successfully updated'})   
    } catch (error) {
-    const e = new Error('Hubo un error')
+    const e = new Error('There was an error')
     return res.status(400).json({msg: e.message})
     
    }

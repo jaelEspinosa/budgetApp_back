@@ -7,10 +7,10 @@ const newBatch = async (req,res) =>{
     try {
       const batch = new Batch(req.body)  
       await batch.save()
-      res.status(200).json({msg:'Guardado con éxito', batch})
+      res.status(200).json({msg:'saved Successfully ', batch})
     } catch (error) {
         console.log(error)
-        return res.status(500).json({msg:'hubo un error'})
+        return res.status(500).json({msg:'There was an error'})
     }
     
 };
@@ -18,13 +18,13 @@ const getBatchs = async (req,res) =>{
     try {
         const batchs = await Batch.find()
         if (!batchs.length){
-            return res.status(200).json({msg:'Aún no tienes Lotes'})
+            return res.status(200).json({msg:"You don't have any Lots yet"})
         }
        return res.status(200).json(batchs)
 
     } catch (error) {
         console.log(error)
-        return res.status(500).json({msg:'hubo un error'})
+        return res.status(500).json({msg:'There was an error'})
     }
 
 };
@@ -37,14 +37,14 @@ const getBatch = async (req,res) =>{
         const batch = await Batch.findById(id)
         console.log(batch)
         if (batch=== null || batch === undefined){
-         return res.status(404).json({msg:'no se ha encontrado el lote'})
+         return res.status(404).json({msg:'batch not found'})
         }
 
         return res.status(200).json(batch)
         
     } catch (error) {
         console.log(error)
-        return res.status(500).json({msg:'hubo un error'}) 
+        return res.status(500).json({msg:'There was an error'}) 
     }
 
 };
@@ -59,7 +59,7 @@ const editBatch = async (req,res) =>{
 
   } catch (error) {
     console.log(error)
-    return res.status(500).json({msg:'hubo un error'}) 
+    return res.status(500).json({msg:'There was an error'}) 
   }
 
 };
@@ -68,10 +68,10 @@ const deleteBatch = async (req,res) =>{
 
   try {
     await Batch.findByIdAndDelete( id )
-    return res.status(200).json({msg:'Eliminado con éxito'})
+    return res.status(200).json({msg:'Successfully deleted'})
   } catch (error) {
     console.log(error)
-    return res.status(500).json({msg:'hubo un error'}) 
+    return res.status(500).json({msg:'There was an error'}) 
   }
 };
 
