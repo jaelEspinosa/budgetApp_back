@@ -118,7 +118,7 @@ const autenticar = async (req, res) =>{
 
         const token = generarJWT(user._id, user.nombre)
         
-        return res.status(200).json({ok:'true', token, user: user.nombre, userEmail: user.email})
+        return res.status(200).json({ok:'true', token, user: user.nombre, userEmail: user.email, _id:user._id})
         
     } catch (error) {
         console.log(error)

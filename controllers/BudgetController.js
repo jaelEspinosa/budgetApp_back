@@ -5,7 +5,11 @@ import Budget from '../models/BudgetModel.js'
 const newBudget = async ( req, res ) => {
 
    const budget = new Budget(req.body)
+   
+   budget.user = req.user._id
+   console.log(budget)
    try {
+    
      await budget.save()
      res.status(200).json({msg:'guardado con éxito', budget})
    } catch (error) {
